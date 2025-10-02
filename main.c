@@ -4,15 +4,16 @@
 #include <stdbool.h>
 #include "student.h"
 #include "dynarr.h"
+#include "database.h"
 
 int main(){
 
     bool isRunning = true;
     int choice = 0;
-
-    dynamic_Array* students;
     
-    initArray(&students);
+    dynamic_Array* students; //Creating a dynamic array
+    
+    initArray(&students); //Initialization
 
     
     while(isRunning){
@@ -28,7 +29,8 @@ int main(){
         printf("4. Display All Students\n");
         printf("5. Search Student By ID\n");
         printf("6. Load Existing Database\n");
-        printf("7. Exit\n");
+        printf("7. Save Database\n");
+        printf("8. Exit\n");
 
         scanf("%d", &choice);
 
@@ -40,21 +42,33 @@ int main(){
                 //updateStudent(students);
                 break;
             case 3:
-                //deleteStudent(students);
+                deleteStudent(students);
                 break;
             case 4:
                 displayAll(students);
                 break;
             case 5:
                 searchById(students);
+                waitForEnter("Press enter to go back to menu.");
                 break;
             case 6:
-                //Loads a database from specified csv file in the same directory
-                loadDatabase(students);
-                break;
+                printf("\e[1;1H\e[2J");
 
+                //Loads a database from specified csv file in the same directory
+                printf("Enter the name of the database to open:\n");
+                char databaseName[50];
+                scanf("%s", &databaseName);
+                sprintf(databaseName, "%s.csv", databaseName);
+                FILE *fp = fopen(databaseName, "r+");
+                loadDatabase(students, fp);
+                break;
+            
             case 7:
+                //saveDatabase(students, fp);
+                break;
+            case 8:
                 isRunning = false; 
+                fclose(fp);
                 break;
             default:
                 printf("Enter a valid value.\n");

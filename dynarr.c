@@ -6,6 +6,7 @@
 
 void initArray(dynamic_Array** arr_ptr){
     
+    //Initializing the dynamic array
     dynamic_Array* container;
     container = (dynamic_Array*)malloc(sizeof(dynamic_Array));
     if(!container){

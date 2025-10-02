@@ -12,9 +12,8 @@ void addStudent(dynamic_Array* container);
 void updateStudent(dynamic_Array* container);
 void deleteStudent(dynamic_Array* container);
 void displayAll(dynamic_Array* container);
-void searchById(dynamic_Array* container);
+int searchById(dynamic_Array* container);
 void deleteStudent(dynamic_Array* container);
-void loadDatabase(dynamic_Array* container);
-void saveDatabase(dynamic_Array* container);
+void waitForEnter(char str[]);
 
 #endif

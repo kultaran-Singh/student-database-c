@@ -4,9 +4,16 @@
 #include "student.h"
 #include "dynarr.h"
 
+void waitForEnter(char str[]){
+    printf("%s", str);
+    // Waiting for the user to press enter
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF) {}
+    getchar();
+}
 void addStudent(dynamic_Array* container){
 
-    printf("\e[1;1H\e[2J"); // This is a regex used to clear the screen
+    printf("\e[1;1H\e[2J"); // This is a regex used to clear the screen, it is used throughout the program
     struct Student s1;
 
     //Gets the data of the student
@@ -33,16 +40,11 @@ void displayAll(dynamic_Array* container){
         printf("%d\t %s\t\t %.2f\n", temp[i].id, temp[i].name, temp[i].score);
     }
 
-    printf("Press enter to go back to menu.");
-
-    // Waiting for the user to press enter
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF) {}
-    getchar();
+    waitForEnter("Press enter to go back to menu.");
     
 }
 
-void searchById(dynamic_Array* container){
+int searchById(dynamic_Array* container){
 
     printf("\e[1;1H\e[2J");
 
@@ -52,9 +54,10 @@ void searchById(dynamic_Array* container){
 
     //Getting the ID to search for
     int key;
-    printf("Enter the ID:\n");
+    printf("Enter the ID of the student:\n");
     scanf("%d", &key);
 
+    //Using Binary Search to search for the key
     int left = 0;
     int right = container->size - 1;
     bool isFound;
@@ -64,6 +67,8 @@ void searchById(dynamic_Array* container){
         if(array[mid].id == key){
             printf("Search Results:\n%d\t %s\t\t %.2f\n", array[mid].id, array[mid].name, array[mid].score);
             isFound = true;
+
+            return array[mid].id;
         }
         if (array[mid].id < key){
             left = mid + 1;
@@ -75,63 +80,16 @@ void searchById(dynamic_Array* container){
     if(isFound == false){
         printf("No student with given ID.\n");
     }
-    printf("Press enter to go back to menu.\n");
-    // Waiting for the user to press enter
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF) {}
-    getchar();
+
+}
+
+void deleteStudent(dynamic_Array* container){
+    int toDelete = searchById(container);
+    struct Student* array = container->array;
+    waitForEnter("Press enter to confirm deletion.");
+    for(int i = toDelete - 1; i < container->size; i++){
+        array[i] = array[i + 1];
+    }
+    container->size--;
     return;
-}
-
-void loadDatabase(dynamic_Array* container){
-
-    printf("\e[1;1H\e[2J");
-
-    printf("Enter the name of the database to open:\n");
-    char databaseName[50];
-    scanf("%s", &databaseName);
-    sprintf(databaseName, "%s.csv", databaseName);
-    FILE *fp = fopen(databaseName, "r+");
-
-    if(!fp){
-        printf("Database Not Found\n");
-        return;
-    }
-
-    char buff[40];
-    struct Student temp;
-
-    while(fgets(buff, 40, fp)){
-        
-        int count = 1;
-        char *element;
-        char *str = strdup(buff);
-        char *restElement = str;
-
-        while((element = strtok_r(restElement, ",", &restElement))){
-            
-            switch(count){
-                case 1:
-                    temp.id = atoi(element);
-                    break;
-                case 2:
-                    sprintf(temp.name, element);
-                    break;
-                case 3:
-                    temp.score = atof(element);
-                    break;
-            }
-            count++;
-            
-        }
-
-        insertElement(container, temp);
-        
-    }
-    fclose(fp);
-
-}
-
-void saveDatabase(dynamic_Array* container){
-    
 }
