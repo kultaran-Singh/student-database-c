@@ -7,8 +7,7 @@
 void waitForEnter(char str[]){
     printf("%s", str);
     // Waiting for the user to press enter
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF) {}
+    clearInputBuffer();
     getchar();
 }
 void addStudent(dynamic_Array* container){
@@ -20,7 +19,7 @@ void addStudent(dynamic_Array* container){
     printf("Enter the name of the student:\n");
     scanf("%s", &s1.name);
     printf("Enter the ID of the student:\n");
-    scanf("%d", &s1.id);
+    s1.id = getIntegerInput();
     printf("Enter the score of the student:\n");
     scanf("%f", &s1.score);
     
@@ -55,7 +54,7 @@ int searchById(dynamic_Array* container){
     //Getting the ID to search for
     int key;
     printf("Enter the ID of the student:\n");
-    scanf("%d", &key);
+    key = getIntegerInput();
 
     //Using Binary Search to search for the key
     int left = 0;
@@ -101,8 +100,32 @@ void updateStudent(dynamic_Array* container) {
     printf("Enter the name of the student:\n");
     scanf("%s", &array[toUpdate - 1].name);
     printf("Enter the ID of the student:\n");
-    scanf("%d", &array[toUpdate - 1].id);
+    array[toUpdate-1].id = getIntegerInput();
     printf("Enter the score of the student:\n");
     scanf("%f", &array[toUpdate - 1].score);
     
+}
+int getIntegerInput() {
+    int value;
+    int result;
+
+    while (1) { // Loop forever until we get valid input
+        result = scanf("%d", &value);
+
+        if (result == 1) {
+            int nextChar = getchar();
+            if (nextChar == '\n' || nextChar == EOF) {
+                return value;
+            }
+        }
+
+        printf("Invalid input. Please enter a whole number only: ");
+        clearInputBuffer(); // Clear the bad input from the buffer
+    }
+}
+
+// This function clears any leftover characters in the input buffer
+void clearInputBuffer() {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
 }

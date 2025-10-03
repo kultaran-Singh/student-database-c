@@ -33,7 +33,7 @@ int main(){
         printf("Enter the function you wish to perform: ");
         
 
-        scanf("%d", &choice);
+        choice = getIntegerInput();
         printf("\n");
         switch(choice){
             case 1:   
@@ -76,7 +76,7 @@ int main(){
 
             printf("Enter the function you wish to perform: ");
 
-            scanf("%d", &choice);
+            choice = getIntegerInput();
 
             switch(choice){
                 case 1:
