@@ -39,7 +39,7 @@ int main(){
                 addStudent(students);
                 break;
             case 2:
-                //updateStudent(students);
+                updateStudent(students);
                 break;
             case 3:
                 deleteStudent(students);
@@ -68,7 +68,8 @@ int main(){
                 break;
             case 8:
                 isRunning = false; 
-                fclose(fp);
+                if(fp)
+                    fclose(fp);
                 break;
             default:
                 printf("Enter a valid value.\n");

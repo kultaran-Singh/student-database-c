@@ -93,3 +93,16 @@ void deleteStudent(dynamic_Array* container){
     container->size--;
     return;
 }
+
+void updateStudent(dynamic_Array* container) {
+    int toUpdate = searchById(container);
+    struct Student* array = container->array;
+
+    printf("Enter the name of the student:\n");
+    scanf("%s", &array[toUpdate - 1].name);
+    printf("Enter the ID of the student:\n");
+    scanf("%d", &array[toUpdate - 1].id);
+    printf("Enter the score of the student:\n");
+    scanf("%f", &array[toUpdate - 1].score);
+    
+}
