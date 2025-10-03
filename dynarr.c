@@ -16,7 +16,7 @@ void initArray(dynamic_Array** arr_ptr){
     
     container->size = 0;
     container->capacity = 100;
-    container->array = (struct Student*)malloc(sizeof(struct Student)*100);
+    container->array = (struct Student*)malloc(sizeof(struct Student)*100); //Initial size of array is 100
     if(!container->array){
         printf("Memory Allocation Failed");
         exit(0);

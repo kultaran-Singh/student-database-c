@@ -70,9 +70,9 @@ int main(){
             printf("|      Student Database Manager      |\n");
             printf("└────────────────────────────────────┘\n\n");
 
-            printf("1. Add Student         2.Delete Student\n\n");
-            printf("3. Update Student      4.Display All Students\n\n");
-            printf("5. Search Student      6.Exit\n\n");
+            printf("[1] Add Student         [2] Delete Student\n\n");
+            printf("[3] Update Student      [4] Display All Students\n\n");
+            printf("[5] Search Student      [6] Exit\n\n");
 
             printf("Enter the function you wish to perform: ");
 

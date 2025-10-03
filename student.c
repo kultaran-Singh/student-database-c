@@ -37,7 +37,7 @@ void displayAll(dynamic_Array* container){
 
     // Iterates and prints all the array elements to the console
     for(int i = 0; i < container->size; i++){
-        printf("%d\t %s\t\t %.2f\n", temp[i].id, temp[i].name, temp[i].score);
+        printf("%-7d %-25s %.2f\n", temp[i].id, temp[i].name, temp[i].score);
     }
 
     waitForEnter("Press enter to go back to menu.");
