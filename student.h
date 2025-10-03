@@ -10,7 +10,6 @@ struct Student{
 
 void addStudent(dynamic_Array* container);
 void updateStudent(dynamic_Array* container);
-void deleteStudent(dynamic_Array* container);
 void displayAll(dynamic_Array* container);
 int searchById(dynamic_Array* container);
 void deleteStudent(dynamic_Array* container);
